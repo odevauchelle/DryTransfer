@@ -25,5 +25,15 @@ __author__ = "Olivier Devauchelle"
 __copyright__ = "Copyright 2020"
 __license__ = "GPL"
 __version__ = "0.1"
+__all__ = ['default']
+__path__ += ['/templates/']
 
-from .functions.label_axes import *
+####################
+#
+#   Reset Matplotlib rcParams
+#
+####################
+
+print('DryTransfer resetting Matplotlib rcParams.')
+from matplotlib import rcParams, rcParamsDefault
+rcParams.update( rcParamsDefault ) # reset

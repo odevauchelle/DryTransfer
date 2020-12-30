@@ -1,13 +1,5 @@
-import matplotlib as mpl
-from pylab import array
 
-####################
-#
-#   Reset Matplotlib rcParams
-#
-####################
-
-mpl.rcParams.update(mpl.rcParamsDefault) # reset
+from .default import *
 
 ####################
 #
@@ -15,8 +7,8 @@ mpl.rcParams.update(mpl.rcParamsDefault) # reset
 #
 ####################
 
-name = 'default'
-full_name = 'Generic style'
+name = 'JFM'
+full_name = 'Journal of Fluid Mechanics'
 
 ####################
 #
@@ -30,8 +22,6 @@ page_width = page_width*0.3937 # inches
 regular_figure_width = 0.75*page_width
 large_figure_width = .99*page_width
 
-regular_aspect_ratio = .7
-
 regular_figure_size = array( [ 1, regular_aspect_ratio ] )*regular_figure_width
 large_figure_size = array( [ 1, regular_aspect_ratio ] )*large_figure_width
 
@@ -42,6 +32,17 @@ large_figure_size = array( [ 1, regular_aspect_ratio ] )*large_figure_width
 ####################
 
 mpl.rcParams['figure.figsize'] = regular_figure_size
+mpl.rcParams['mathtext.fontset'] = 'stix'
+mpl.rcParams['font.family'] = 'STIXGeneral'
+mpl.rcParams['text.usetex'] = True
+
+####################
+#
+#   label_axes parameters
+#
+####################
+
+# label_axes
 
 ####################
 #

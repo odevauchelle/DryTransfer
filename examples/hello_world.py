@@ -1,8 +1,7 @@
 import sys
 sys.path.append('../')
-from inspect import *
 
-from DryTransfer.templates import JFM as journal
+from DryTransfer import PRL as journal
 
 from pylab import subplots, linspace, show, sin
 
@@ -10,10 +9,10 @@ fig, axs = subplots( nrows = 3, sharex = True )
 x = linspace(-5,5,100)
 
 for i, ax in enumerate(axs) :
-    ax.plot(x,sin(i*x))
+    ax.plot( x, sin( i*x ) )
 
-print(getmembers(journal,isfunction))
+axs[0].set_title( journal.full_name )
 
-# journal.label_axes(ax)
+journal.label_axes(axs)
 
 show()

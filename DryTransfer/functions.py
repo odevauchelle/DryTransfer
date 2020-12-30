@@ -1,5 +1,5 @@
 
-default_style = dict(
+_label_axes_default_style = dict(
     letter_index = 0,
     label = lambda i: '(' + 'abcdefghijklmnopqrstuvwxyz'[i] + ')',
     bbox = dict( boxstyle = "round, pad=.2", fc = 'white', ec = 'none', alpha = .5 ),
@@ -18,7 +18,7 @@ def label_axes( axes, **kwargs ) :
     Add labels on axes.
     '''
 
-    st = default_style.copy()
+    st = _label_axes_default_style.copy()
     st.update(kwargs)
 
     letter_index = st.pop('letter_index')
