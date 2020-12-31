@@ -1,4 +1,4 @@
-from matplotlib.pyplot import gcf
+from matplotlib.pyplot import gcf, gca
 
 ###################################
 #
@@ -23,6 +23,22 @@ def label_axes( axes = None, fig = None, **kwargs ) :
 
     '''
     Add labels on axes.
+
+    Arguments
+    ---------
+    axes : list
+        List of axes to be labelled (optional)
+    fig : figure handle
+        Figure from which axes are guessed (optional)
+    letter_index : int
+        Index of first label
+    **kwargs : dict
+        Style arguments passed to annotate
+
+    Returns
+    --------
+    letter_index : int
+        Index of next label
     '''
 
     if axes is None :
@@ -74,7 +90,26 @@ _default_origin_markers = [
 def plot_frame( ax = None, **kwargs ) :
 
     '''
-    Draws a
+    Draws a two-dimensional reference frame.
+
+    Arguments
+    ---------
+    ax : Matplotlib axes
+        Axes on which to draw reference frame (optional)
+    arrow_length : float or list
+        Length of frame arrows
+    text_color : str or tuple
+        Axis names color
+    center : tuple
+        Position of origin
+    letters : list
+        Name of axis
+    orientation : 1 or -1
+        Left or right
+    text_shift_ratio : float
+        Labels position with respect to arrows
+    origin_markers : list
+        Markers denoting origin
     '''
 
     if ax is None :

@@ -9,6 +9,7 @@ from .default import *
 
 name = 'JFM'
 full_name = 'Journal of Fluid Mechanics'
+url = r'https://www.cambridge.org/core/journals/journal-of-fluid-mechanics/information/instructions-contributors'
 
 ####################
 #
@@ -44,9 +45,10 @@ mpl.rcParams['text.usetex'] = True
 
 default_label_axes = label_axes
 
-def label_axes( **kwargs ) :
-    kwargs.update( label = lambda i: '(' + 'abcdefghijklmnopqrstuvwxyz'[i] + ')' )
-    return default_label_axes( **kwargs )
+def label_axes( *args, **kwargs ) :
+    kwargs['label'] = lambda i: '(' + 'abcdefghijklmnopqrstuvwxyz'[i] + ')'
+    kwargs['bbox'] = None
+    return default_label_axes( *args, **kwargs )
 
 ####################
 #
