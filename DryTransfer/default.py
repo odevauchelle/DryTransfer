@@ -6,6 +6,16 @@ from .functions import *
 
 ####################
 #
+#   Reset Matplotlib rcParams
+#
+####################
+
+print('DryTransfer resetting Matplotlib rcParams.')
+from matplotlib import rcParams, rcParamsDefault
+rcParams.update( rcParamsDefault ) # reset
+
+####################
+#
 #   Template name
 #
 ####################

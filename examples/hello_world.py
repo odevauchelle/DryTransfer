@@ -1,7 +1,7 @@
 import sys
 sys.path.append('../')
 
-from DryTransfer import PRL as journal
+from DryTransfer import JFM as journal
 
 from pylab import subplots, linspace, show, sin
 
@@ -13,6 +13,6 @@ for i, ax in enumerate(axs) :
 
 axs[0].set_title( journal.full_name )
 
-journal.label_axes(axs)
+journal.label_axes()
 
 show()

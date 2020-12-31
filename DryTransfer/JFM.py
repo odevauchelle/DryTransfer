@@ -36,13 +36,17 @@ mpl.rcParams['mathtext.fontset'] = 'stix'
 mpl.rcParams['font.family'] = 'STIXGeneral'
 mpl.rcParams['text.usetex'] = True
 
-####################
-#
-#   label_axes parameters
-#
-####################
+###################
 
-# label_axes
+#  label_axes parameters
+
+###################
+
+default_label_axes = label_axes
+
+def label_axes( **kwargs ) :
+    kwargs.update( label = lambda i: '(' + 'abcdefghijklmnopqrstuvwxyz'[i] + ')' )
+    return default_label_axes( **kwargs )
 
 ####################
 #
