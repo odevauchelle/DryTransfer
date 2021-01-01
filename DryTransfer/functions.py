@@ -2,22 +2,87 @@ from matplotlib.pyplot import gcf, gca
 
 ###################################
 #
+# Function argument management
+#
+###################################
+
+def get_arg_names( func ):
+    return func.__code__.co_varnames[ :func.__code__.co_argcount ]
+
+def filter_out_kwargs( func, kwargs ) :
+
+    filtered_kwargs = {}
+    remaining_kwargs = kwargs.copy()
+
+    for key in kwargs.keys() :
+        if key in get_arg_names( func ) :
+            filtered_kwargs[key] = remaining_kwargs.pop( key )
+
+    return func( **filtered_kwargs ), remaining_kwargs
+
+###################################
+#
 # Label axes
 #
 ###################################
 
 _label_axes_default_style = dict(
     letter_index = 0,
-    label = lambda i: 'abcdefghijklmnopqrstuvwxyz'[i],
+    alphabet = 'abcdefghijklmnopqrstuvwxyz',
+    ornament = ('', ''),
+    loc = 'upper left',
+    padding = ( 5, 5 ),
     bbox = dict( boxstyle = "round, pad=.2", fc = 'white', ec = 'none', alpha = .5 ),
-    xytext = ( 5, -5 ),
-    zorder = None,
-    xy = ( 0, 1 ),
-    xycoords = 'axes fraction',
-    textcoords = 'offset points',
-    ha = 'left',
-    va = 'top',
+    zorder = None
     )
+
+def generate_label( letter_index, alphabet, ornament ):
+    return alphabet[letter_index].join(ornament)
+
+def generate_label_location( loc, padding ) :
+
+    loc_kwargs = dict(
+        xy = [ 0, 0 ],
+        xytext = [ 0, 0 ],
+        ha = '',
+        va = '',
+        xycoords = 'axes fraction',
+        textcoords = 'offset points'
+        )
+
+    y, x = loc.split(' ')
+
+    if x == 'left' :
+        loc_kwargs['xy'][0] = 0
+        loc_kwargs['xytext'][0] = padding[0]
+        loc_kwargs['ha'] = 'left'
+
+    elif x == 'right' :
+        loc_kwargs['xy'][0] = 1
+        loc_kwargs['xytext'][0] = -padding[0]
+        loc_kwargs['ha'] = 'right'
+
+    elif x == 'center' :
+        loc_kwargs['xy'][0] = .5
+        loc_kwargs['xytext'][0] = 0
+        loc_kwargs['ha'] = 'center'
+
+    if y == 'upper' :
+        loc_kwargs['xy'][1] = 1
+        loc_kwargs['xytext'][1] = -padding[1]
+        loc_kwargs['va'] = 'top'
+
+    elif y == 'lower' :
+        loc_kwargs['xy'][1] = 0
+        loc_kwargs['xytext'][1] = padding[1]
+        loc_kwargs['va'] = 'bottom'
+
+    elif y == 'center' :
+        loc_kwargs['xy'][1] = .5
+        loc_kwargs['xytext'][1] = 0
+        loc_kwargs['va'] = 'center'
+
+    return loc_kwargs
 
 def label_axes( axes = None, fig = None, **kwargs ) :
 
@@ -47,19 +112,21 @@ def label_axes( axes = None, fig = None, **kwargs ) :
         except :
             axes = gcf().axes
 
-
     st = _label_axes_default_style.copy()
-    st.update(kwargs)
-
-    letter_index = st.pop('letter_index')
+    st.update( kwargs )
 
     for ax in axes :
 
-        ax.annotate( st['label']( letter_index ), **st )
+        label, remaining_kwargs = filter_out_kwargs( generate_label, st )
+        location, remaining_kwargs = filter_out_kwargs( generate_label_location, remaining_kwargs )
 
-        letter_index += 1
+        location.update(remaining_kwargs)
 
-    return letter_index
+        ax.annotate( s = label, **location )
+
+        st['letter_index'] += 1
+
+    return st['letter_index']
 
 ###################################
 #
@@ -177,6 +244,33 @@ def plot_frame( ax = None, **kwargs ) :
 
 ###################################
 #
+# Figure name
+#
+###################################
+
+def figname( file, ext = '.pdf' ):
+    '''
+    Generate figure name based on current script name.
+
+    Arguments
+    ---------
+    file : str
+        The file name to be converted, typically __file__
+    ext : str
+        Extension
+
+    Returns
+    -------
+    figure_name : str
+        File name with a new extension
+    '''
+
+    figure_name = file.split('/')[-1].split('.')[0] + ext
+
+    return figure_name
+
+###################################
+#
 # try it out
 #
 ###################################
@@ -194,7 +288,9 @@ if __name__ == '__main__' :
     for i, ax in enumerate( axs.flatten() ) :
         ax.contourf( x, y, angle( sqrt( z**i - .1*z + .3 ) ) )
 
-    label_axes()
-    plot_frame( axs[0,0], arrow_length = .5 )
+
+    # print( filter_out_kwargs( figname, dict( file = 'toto.py', caca = 5, ext = '.svg' ) ) )
+    label_axes( loc = 'upper center' )
+    # plot_frame( axs[0,0], arrow_length = .5 )
 
     show()

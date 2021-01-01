@@ -5,6 +5,7 @@
 ## Basic usage
 
 Generate a figure with subplots:
+
 ```python
 from pylab import *
 
@@ -18,11 +19,15 @@ for i, ax in enumerate( axs.flatten() ) :
     ax.contourf( x, y, angle( sqrt( z**i - .1*z + .3 ) ) )
     ax.axis('off')
 ```
+
 Import `label_axes` from `DryTransfer.functions`, and use it:
+
 ```python
 from DryTransfer.functions import label_axes
 
 label_axes()
 ```
+
 Here is the result:
+
 ![Plot frame](../figures/try_label_axes.svg)

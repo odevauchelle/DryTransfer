@@ -4,7 +4,7 @@ Style templates for Matplotlib figures.
 
 ## Quick example
 
-Import style of the Journal of Fluid Mechanics:
+Import style of the *Journal of Fluid Mechanics*:
 
 ```python
 from DryTransfer import JFM as journal
@@ -37,14 +37,13 @@ Here is the result:
 
 ![First example](./figures/hello_world.svg)
 
-
 To change journal style, simply import another template:
 
 ```python
 from DryTransfer import PRL as journal
 ```
 
-This is for Physical Review Letters. Here is the result:
+This is for *Physical Review Letters*. Here is the result:
 
 ![Other style](./figures/hello_world_2.svg)
 
