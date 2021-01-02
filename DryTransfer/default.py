@@ -2,7 +2,9 @@ from pylab import array
 import matplotlib as mpl
 from scipy.constants import golden
 
-from .functions import *
+from .functions.plot_frame import plot_frame
+from .functions.label_axes import label_axes
+from .functions.miscellaneous import *
 
 ####################
 #

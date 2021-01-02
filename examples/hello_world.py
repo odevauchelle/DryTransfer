@@ -15,6 +15,6 @@ for i, ax in enumerate(axs) :
 
 journal.label_axes()
 
-savefig( '../figures/hello_world.svg', bbox_inches = 'tight' )
+# savefig( '../figures/hello_world.svg', bbox_inches = 'tight' )
 
 show()
