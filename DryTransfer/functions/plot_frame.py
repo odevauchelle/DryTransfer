@@ -85,11 +85,10 @@ def plot_frame( ax = None, center = ( 0., 0. ), arrow_length = 1., letters = ( '
         except :
             pass
 
-    xytext = [ ( center[0], center[1] + orientation*arrow_length[1] ), ( center[0] + arrow_length[0], center[1]  ) ]
+    xytext = [ ( center[0] + arrow_length[0], center[1]  ), ( center[0], center[1] + orientation*arrow_length[1] ) ]
     xy = [ center ]*2
 
     for i, letter in enumerate( letters ) :
-
 
         if i < 2 :
             ax.annotate( '', xy = xy[i], xytext = xytext[i], **annotate_kwargs ) # arrow, two annotate calls for exact arrow length
