@@ -8,6 +8,14 @@ from .functions.miscellaneous import *
 
 ####################
 #
+# constants
+#
+####################
+
+inches_per_cm = 0.3937
+
+####################
+#
 #   Reset Matplotlib rcParams
 #
 ####################

@@ -18,13 +18,16 @@ url = r'https://www.cambridge.org/core/journals/journal-of-fluid-mechanics/infor
 ####################
 
 page_width = 16.3 # cm
-page_width = page_width*0.3937 # inches
+page_width = page_width*inches_per_cm # inches
 
 regular_figure_width = 0.75*page_width
 large_figure_width = .99*page_width
 
 regular_figure_size = array( [ 1, regular_aspect_ratio ] )*regular_figure_width
 large_figure_size = array( [ 1, regular_aspect_ratio ] )*large_figure_width
+
+graphical_abstract_figure_size = array([6,5]) # cm
+graphical_abstract_figure_size = graphical_abstract_figure_size*inches_per_cm # inches
 
 ####################
 #
