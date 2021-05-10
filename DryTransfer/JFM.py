@@ -29,6 +29,15 @@ large_figure_size = array( [ 1, regular_aspect_ratio ] )*large_figure_width
 graphical_abstract_figure_size = array([6,5]) # cm
 graphical_abstract_figure_size = graphical_abstract_figure_size*inches_per_cm # inches
 
+
+####################
+#
+#   Resolution
+#
+####################
+
+graphical_abstract_dpi = 300
+
 ####################
 #
 #   Matplotlib rcParms
@@ -49,9 +58,15 @@ mpl.rcParams['text.usetex'] = True
 default_label_axes = label_axes
 
 def label_axes( *args, **kwargs ) :
-    kwargs['label'] = lambda i: '(' + 'abcdefghijklmnopqrstuvwxyz'[i] + ')'
-    kwargs['bbox'] = None
-    return default_label_axes( *args, **kwargs )
+
+    label_axes_kwargs = dict(
+        label = lambda i: '(' + 'abcdefghijklmnopqrstuvwxyz'[i] + ')',
+        bbox = None
+        )
+
+    label_axes_kwargs.update( kwargs )
+
+    return default_label_axes( *args, **label_axes_kwargs )
 
 ####################
 #
