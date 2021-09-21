@@ -24,8 +24,9 @@ Various functions for DryTransfer
 __author__ = "Olivier Devauchelle"
 __copyright__ = "Copyright 2020"
 __license__ = "GPL"
-__all__ = ['label_axes', 'plot_frame', 'miscellaneous']
+__all__ = ['label_axes', 'plot_frame', 'miscellaneous', 'ticks']
 
 from .label_axes import label_axes
 from .plot_frame import plot_frame
 from .miscellaneous import *
+from .ticks import *

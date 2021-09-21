@@ -5,6 +5,7 @@ from scipy.constants import golden
 from .functions.plot_frame import plot_frame
 from .functions.label_axes import label_axes
 from .functions.miscellaneous import *
+from .functions.ticks import *
 
 ####################
 #
