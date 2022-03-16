@@ -1,5 +1,6 @@
 
 from .default import *
+from .functions.label_axes import generate_label
 
 ####################
 #
@@ -34,6 +35,30 @@ large_figure_size = array( [ 1, regular_aspect_ratio ] )*large_figure_width
 ####################
 
 mpl.rcParams['figure.figsize'] = regular_figure_size
+mpl.rcParams['font.size'] = 7
+
+###################
+
+#  label_axes parameters
+
+###################
+
+default_label_axes = label_axes
+
+def label_axes( *args, **kwargs ) :
+
+    label_axes_kwargs = dict(
+        generate_label = lambda letter_index : generate_label( letter_index ).upper(),
+        weight = 'bold',
+        fontsize = int( mpl.rcParams['font.size']*1.5 ),
+        bbox = None
+        )
+
+    label_axes_kwargs.update( kwargs )
+
+    return default_label_axes( *args, **label_axes_kwargs )
+
+
 
 ####################
 #
