@@ -1,3 +1,5 @@
+from matplotlib import colors
+import colorsys
 
 def figname( filename = None , ext = '.pdf' ):
     '''
@@ -43,6 +45,13 @@ def float2str( num, rounding_scale = 100 ) :
     disp_num = round( num*rounding_scale )/float(rounding_scale)
 
     return str( disp_num )
+
+def make_rgb_transparent( rgb, bg_rgb = [1,1,1], alpha = 1 ):
+    return [alpha * c1 + (1 - alpha) * c2
+            for (c1, c2) in zip(rgb, bg_rgb)]
+
+def color_name_to_rgb( color_name ) :
+    return colors.hex2color( colors.ColorConverter.colors[ color_name ] )
 
 ###################################
 #
