@@ -53,6 +53,16 @@ def make_rgb_transparent( rgb, bg_rgb = [1,1,1], alpha = 1 ):
 def color_name_to_rgb( color_name ) :
     return colors.hex2color( colors.ColorConverter.colors[ color_name ] )
 
+def lighter_shade( color, alpha = .5 ) :
+
+    try :
+        color = color_name_to_rgb( color )
+    except :
+        color = color
+
+    return make_rgb_transparent( color, alpha = alpha )
+
+
 ###################################
 #
 # try it out
