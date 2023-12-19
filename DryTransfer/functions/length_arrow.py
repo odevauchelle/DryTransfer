@@ -29,15 +29,17 @@ def length_arrow( points, label = '', ax = None, arrow_style = None, text_style 
     if arrow_style is None :
         arrow_style = _arrow_default_style
 
+    arrow_style['arrowprops'].update( kwargs )
+
     if text_style is None :
         text_style = _text_default_style
 
     center = mean( array( points ), axis = 0 )
-    ax.text( *center, label, **text_style, **kwargs  )
+    ax.text( *center, label, **text_style  )
 
     for end in points :
         start = center + ( array(end) - center )*relative_text_space
-        ax.annotate( '', end, start , **arrow_style, **kwargs )
+        ax.annotate( '', end, start , **arrow_style )
 
 ###################################
 #
