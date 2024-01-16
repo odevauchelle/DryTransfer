@@ -117,8 +117,10 @@ def label_axes( axes = None, fig = None, letter_index = 0, loc = 'upper left', p
     annotate_kwargs.update( kwargs ) # overrides location keywords
 
     for ax in axes :
-
-        ax.annotate( text = generate_label( letter_index ), **annotate_kwargs )
+        try :
+            ax.annotate( text = generate_label( letter_index ), **annotate_kwargs )
+        except :
+            ax.annotate( s = generate_label( letter_index ), **annotate_kwargs )
 
         letter_index += 1
 
