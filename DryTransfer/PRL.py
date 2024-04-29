@@ -19,6 +19,7 @@ url = r'https://journals.aps.org/prl/authors'
 
 regular_figure_width = 8.6 # cm, https://journals.aps.org/prl/authors
 regular_figure_width *= 0.3937 # inches
+regular_figure_width *= 1.3 # finer lines, smaller font
 
 page_width = 2*regular_figure_width
 
