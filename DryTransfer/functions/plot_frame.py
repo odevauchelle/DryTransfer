@@ -85,26 +85,28 @@ def plot_frame( ax = None, center = ( 0., 0. ), arrow_length = 1., letters = ( '
         except :
             pass
 
-    xytext = [ ( center[0] + arrow_length[0], center[1]  ), ( center[0], center[1] + orientation*arrow_length[1] ) ]
-    xy = [ center ]*2
+    xy_start = [ center ]*2
+    xy_end = [ ( center[0] + arrow_length[0], center[1]  ), ( center[0], center[1] + orientation*arrow_length[1] ) ]
 
     for i, letter in enumerate( letters ) :
 
         if i < 2 :
-            ax.annotate( '', xy = xy[i], xytext = xytext[i], **annotate_kwargs ) # arrow, two annotate calls for exact arrow length
-            direction = array( xytext[i] ) - array( xy[i] )
-            direction *= z_offset/norm( direction )
-            ghost_xy = xytext[i]
+            ax.annotate( '', xy = xy_start[i], xytext = xy_end[i], **annotate_kwargs ) # arrow, two annotate calls for exact arrow length
+            direction = array( xy_end[i] ) - array( xy_start[i] )
+            direction /= norm( direction )
+            xytext = direction*z_offset
+            ghost_xy = xy_end[i]
         else :
-            direction = - mean( array( xytext ) - array( xy ), axis = 1 )
-            direction *= sqrt(2)*z_offset/norm( direction )
+            direction = - mean( array( xy_end ) - array( xy_start ), axis = 0 )
+            direction /= norm( direction )
+            xytext = sqrt(2)*direction*z_offset
             ghost_xy = center
 
 
         ghost_annotate_kwargs = annotate_kwargs.copy()
         ghost_annotate_kwargs.update( arrowprops = None, textcoords = 'offset points' )
 
-        ax.annotate( letter, xy = ghost_xy, xytext = direction, **ghost_annotate_kwargs ) # arrow label
+        ax.annotate( letter, xy = ghost_xy, xytext = xytext, **ghost_annotate_kwargs ) # arrow label
 
 
     for marker_style in origin_marker :
