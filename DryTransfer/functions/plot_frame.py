@@ -95,11 +95,23 @@ def plot_frame( ax = None, center = ( 0., 0. ), arrow_length = 1., letters = ( '
             direction = array( xy_end[i] ) - array( xy_start[i] )
             direction /= norm( direction )
             xytext = direction*z_offset
+
+            if ( i == 0 and ax.xaxis_inverted() ) or ( i == 1 and ax.yaxis_inverted() ) :
+                xytext *= -1
+
             ghost_xy = xy_end[i]
+
         else :
             direction = - mean( array( xy_end ) - array( xy_start ), axis = 0 )
             direction /= norm( direction )
             xytext = sqrt(2)*direction*z_offset
+
+            if ax.xaxis_inverted( ) :
+                xytext[0] *= -1
+
+            if ax.yaxis_inverted( ) :
+                xytext[1] *= -1
+
             ghost_xy = center
 
 
@@ -125,8 +137,12 @@ if __name__ == '__main__' :
 
     x = linspace(0,1,100)
     plot(x, .5*cos( 20*x**2 ))
+
     axis('equal')
     axis('off')
-    plot_frame( arrow_length = .3, color = 'm', letters = ('x', 'y', 'z') )
+    # gca().invert_yaxis()
+    print( gca().yaxis_inverted() )
+
+    plot_frame( arrow_length = .3, color = 'm', letters = ('x', 'y', 'z'), orientation = 1 )
 
     show()
