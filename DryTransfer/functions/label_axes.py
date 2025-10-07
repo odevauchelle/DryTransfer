@@ -78,7 +78,7 @@ def generate_label_location( loc, padding ) :
 
     return loc_kwargs
 
-def label_axes( axes = None, fig = None, letter_index = 0, loc = 'upper left', padding = ( 5, 5 ), generate_label = generate_label, **kwargs ) :
+def label_axes( axes = None, fig = None, letter_index = 0, loc = 'upper left', padding = ( 5, 5 ), generate_label = generate_label, bbox_kwargs = {}, **kwargs ) :
 
     '''
     Add labels on axes.
@@ -114,6 +114,7 @@ def label_axes( axes = None, fig = None, letter_index = 0, loc = 'upper left', p
 
     annotate_kwargs = _label_axes_default_style.copy() # overrides annotate default
     annotate_kwargs.update( generate_label_location( loc, padding ) )
+    annotate_kwargs['bbox'].update( bbox_kwargs )
     annotate_kwargs.update( kwargs ) # overrides location keywords
 
     for ax in axes :
